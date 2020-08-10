@@ -11,11 +11,6 @@ public class Folder extends Document {
 		this.childDocuments = new ArrayList<Document>();
 	}
 	
-	@Override
-	public int size() {
-		return 0;
-	}
-	
 	public void add(Document document) {
 		childDocuments.add(document);
 	}

@@ -8,11 +8,6 @@ public class File extends Document {
 		this.content = "";
 	}
 	
-	@Override
-	public int size() {
-		return 0;
-	}
-	
 	public void write(String content) {
 		this.content = new StringBuilder()
 					.append(this.content)
@@ -26,5 +21,9 @@ public class File extends Document {
 	
 	public void clear() {
 		content = "";
+	}
+	
+	public int size() {
+		return content.length();
 	}
 }

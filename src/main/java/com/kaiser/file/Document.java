@@ -9,6 +9,4 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public abstract class Document {
 	protected String name;
-	
-	public abstract int size();
 }

@@ -46,6 +46,13 @@ public class FileTest {
 	}
 	
 	@Test
+	public void should_read_empty_string_if_no_content_in_the_file() {
+		File file = new File("Pie");	
+		
+		assertEquals("", file.read());
+	}
+	
+	@Test
 	public void should_clear_the_content_of_the_file() {
 		File file = new File("Pie");	
 		String content = "Hello, World!";
@@ -56,5 +63,21 @@ public class FileTest {
 		file.clear();
 		
 		assertTrue(file.read().isEmpty());
+	}
+	
+	@Test
+	public void should_return_size_of_the_content_of_the_file() {
+		File file = new File("Pie");	
+		String content = "Hello, World!";
+		file.write(content);
+
+		assertEquals(content.length(), file.size());
+	}
+	
+	@Test
+	public void should_return_size_of_the_content_zero_if_no_content_is_written_to_the_file() {
+		File file = new File("Pie");	
+
+		assertEquals(0, file.size());
 	}
 }
