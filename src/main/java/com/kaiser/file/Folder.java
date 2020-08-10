@@ -3,9 +3,6 @@ package com.kaiser.file;
 import java.util.ArrayList;
 import java.util.List;
 
-import lombok.Data;
-
-@Data
 public class Folder extends Document {
 	private List<Document> childDocuments;
 	
@@ -21,6 +18,10 @@ public class Folder extends Document {
 	
 	public void add(Document document) {
 		childDocuments.add(document);
+	}
+	
+	public List<Document> getDocuments() {
+		return childDocuments;
 	}
 	
 }

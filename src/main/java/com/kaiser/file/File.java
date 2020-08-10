@@ -5,6 +5,7 @@ public class File extends Document {
 
 	public File (String name) {
 		super(name);
+		this.content = "";
 	}
 	
 	@Override
@@ -13,7 +14,10 @@ public class File extends Document {
 	}
 	
 	public void write(String content) {
-		this.content = content;
+		this.content = new StringBuilder()
+					.append(this.content)
+					.append(content)
+					.toString();
 	}
 	
 	public String read() {
