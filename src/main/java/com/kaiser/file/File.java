@@ -23,4 +23,8 @@ public class File extends Document {
 	public String read() {
 		return content;
 	}
+	
+	public void clear() {
+		content = "";
+	}
 }

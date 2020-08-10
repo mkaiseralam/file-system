@@ -44,4 +44,17 @@ public class FileTest {
 		
 		assertEquals(content1 + content2, file.read());
 	}
+	
+	@Test
+	public void should_clear_the_content_of_the_file() {
+		File file = new File("Pie");	
+		String content = "Hello, World!";
+		file.write(content);
+		
+		assert(!file.read().isEmpty());
+		
+		file.clear();
+		
+		assertTrue(file.read().isEmpty());
+	}
 }
