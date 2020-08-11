@@ -1,6 +1,6 @@
 package com.kaiser.file;
 
-public class File extends Document {
+public class File extends Node {
 	private String content;
 
 	public File (String name) {

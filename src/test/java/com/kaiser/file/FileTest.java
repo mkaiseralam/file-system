@@ -13,7 +13,7 @@ public class FileTest {
 		File file = new File("Pie");
 		
 		assertNotNull(file);
-		assertTrue(file instanceof Document);
+		assertTrue(file instanceof Node);
 	}
 	
 	@Test

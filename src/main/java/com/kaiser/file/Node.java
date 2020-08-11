@@ -1,12 +1,12 @@
 package com.kaiser.file;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Data
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public abstract class Document {
+public abstract class Node {
 	protected String name;
 }
