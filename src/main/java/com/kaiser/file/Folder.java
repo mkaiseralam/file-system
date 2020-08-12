@@ -1,46 +1,49 @@
 package com.kaiser.file;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
+import java.util.List;
 
-import com.kaiser.iterator.Directory;
-import com.kaiser.iterator.TreeSetDirectory;
+import com.kaiser.iterator.CompositeIterator;
 
 public class Folder extends Node {
-	private Directory nodes;
+	private List<Node> nodes;
 	
 	public Folder(String name) {
 		super(name);
-		this.nodes = new TreeSetDirectory();
+		this.nodes = new ArrayList<>();
+	}
+	
+	@Override
+	public Iterator<Node> createIterator() {
+		return new CompositeIterator(nodes.iterator());
+	}
+	
+	@Override
+	public int size() {
+		return nodes.parallelStream()
+				.reduce(0, (partialSizeResult, node) -> partialSizeResult + node.size(), Integer::sum);
 	}
 	
 	public void add(Node node) {
 		nodes.add(node);
 	}
 	
-	public Iterator<Node> getNodes() {
-		return nodes.createIterator();
-	}
-	
 	public void list() {
-		Iterator<Node> iterator = getNodes();
-		
-		while (iterator.hasNext()) {
-			Node node = iterator.next();
-			if (node instanceof File) {
-				System.out.println(node.getName());
-			}
-		}
+		nodes.stream()
+			.filter(n -> n instanceof File)
+			.sorted(Comparator.comparing(Node::getName))
+			.map(n -> n.getName())
+			.forEach(System.out::println);
 	}
 	
 	public void tree() {
-		Iterator<Node> iterator = getNodes();
+		Iterator<Node> iterator = createIterator();
 		
 		while (iterator.hasNext()) {
 			Node node = iterator.next();
 			System.out.println(node.getName());
-			if (node instanceof Folder) {
-				((Folder) node).tree();
-			}
 		}
 	}
 }

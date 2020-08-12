@@ -1,11 +1,25 @@
 package com.kaiser.file;
 
+import java.util.Iterator;
+
+import com.kaiser.iterator.NullIterator;
+
 public class File extends Node {
 	private String content;
 
 	public File (String name) {
 		super(name);
 		this.content = "";
+	}
+	
+	@Override
+	public int size() {
+		return content.length();
+	}
+
+	@Override
+	public Iterator<Node> createIterator() {
+		return new NullIterator();
 	}
 	
 	public void write(String content) {
@@ -21,9 +35,5 @@ public class File extends Node {
 	
 	public void clear() {
 		content = "";
-	}
-	
-	public int size() {
-		return content.length();
 	}
 }
