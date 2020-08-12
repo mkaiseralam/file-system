@@ -1,38 +1,46 @@
 package com.kaiser.file;
 
-import java.util.Comparator;
-import java.util.TreeSet;
+import java.util.Iterator;
+
+import com.kaiser.iterator.Directory;
+import com.kaiser.iterator.TreeSetDirectory;
 
 public class Folder extends Node {
-	private TreeSet<Node> nodes;
+	private Directory nodes;
 	
 	public Folder(String name) {
 		super(name);
-		this.nodes = new TreeSet<>(Comparator.comparing(Node::getName));
+		this.nodes = new TreeSetDirectory();
 	}
 	
 	public void add(Node node) {
 		nodes.add(node);
 	}
 	
-	public TreeSet<Node> getNodes() {
-		return nodes;
+	public Iterator<Node> getNodes() {
+		return nodes.createIterator();
 	}
 	
 	public void list() {
-		nodes.stream()
-			.filter(d -> d instanceof File)
-			.map(d -> d.getName())
-			.forEach(System.out::println);
+		Iterator<Node> iterator = getNodes();
+		
+		while (iterator.hasNext()) {
+			Node node = iterator.next();
+			if (node instanceof File) {
+				System.out.println(node.getName());
+			}
+		}
 	}
 	
 	public void tree() {
-		nodes.forEach(node -> {
+		Iterator<Node> iterator = getNodes();
+		
+		while (iterator.hasNext()) {
+			Node node = iterator.next();
 			System.out.println(node.getName());
 			if (node instanceof Folder) {
-				Folder folder = (Folder) node;
-				folder.tree();
+				((Folder) node).tree();
 			}
-		});
+		}
 	}
 }

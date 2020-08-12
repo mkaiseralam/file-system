@@ -8,7 +8,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.TreeSet;
+import java.util.Iterator;
 
 import org.junit.After;
 import org.junit.Before;
@@ -44,10 +44,10 @@ public class FolderTest {
 		
 		folder.add(file);
 		
-		TreeSet<Node> nodes = folder.getNodes();
+		Iterator<Node> nodes = folder.getNodes();
 		
-		assertFalse(nodes.isEmpty());
-		assertSame(file, nodes.first());
+		assertTrue(nodes.hasNext());
+		assertSame(file, nodes.next());
 	}
 	
 	@Test
@@ -57,10 +57,10 @@ public class FolderTest {
 		
 		folder.add(subfolder);
 		
-		TreeSet<Node> nodes = folder.getNodes();
+		Iterator<Node> nodes = folder.getNodes();
 		
-		assertFalse(nodes.isEmpty());
-		assertSame(subfolder, nodes.first());
+		assertTrue(nodes.hasNext());
+		assertSame(subfolder, nodes.next());
 	}
 	
 	@Test
@@ -75,12 +75,15 @@ public class FolderTest {
 		folder.add(subfolder);
 		folder.add(subfolder);
 		
-		TreeSet<Node> nodes = folder.getNodes();
+		Iterator<Node> nodes = folder.getNodes();
 		
-		assertFalse(nodes.isEmpty());
-		assertEquals(2, nodes.size());
-		assertSame(subfolder, nodes.first());
-		assertSame(file, nodes.last());
+		int size = 0;
+		while(nodes.hasNext()) {
+			size++;
+			nodes.next();
+		}
+		
+		assertEquals(2, size);
 	}
 	
 	@Test
