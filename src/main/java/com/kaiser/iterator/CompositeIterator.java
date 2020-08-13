@@ -12,7 +12,6 @@ import com.kaiser.file.Node;
  */
 public class CompositeIterator implements Iterator<Node> {
 	Stack<Iterator<Node>> stack = new Stack<Iterator<Node>>();
-	Node current;
 	
 	public CompositeIterator(Iterator<Node> iterator) {
 		stack.push(iterator);

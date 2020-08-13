@@ -5,9 +5,13 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Iterator;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import com.kaiser.iterator.NullIterator;
 
 public class FileTest {
 	@Rule
@@ -106,9 +110,20 @@ public class FileTest {
 	}
 	
 	@Test
-	public void should_return_size_of_the_content_zero_if_no_content_is_written_to_the_file() {
+	public void should_return_size_of_the_content_zero_when_no_content_is_written_to_the_file() {
 		File file = new File("Pie");	
 
 		assertEquals(0, file.size());
 	}
+	
+	@Test
+	public void should_return_iterator() {
+		File file = new File("Pie");	
+
+		Iterator<Node> iterator = file.createIterator();
+		
+		assertTrue(iterator instanceof NullIterator);
+		assertFalse(iterator.hasNext());
+	}
+	
 }

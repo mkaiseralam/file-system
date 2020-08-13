@@ -16,6 +16,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import com.kaiser.iterator.CompositeIterator;
+import com.kaiser.iterator.NullIterator;
+
 public class FolderTest {
 	
 	@Rule
@@ -130,7 +133,7 @@ public class FolderTest {
 	}
 	
 	@Test
-	public void should_print_empty_if_no_file_inside_a_folder() {
+	public void should_print_empty_when_no_file_inside_a_folder() {
 		Folder folder = new Folder("Parent");
 		
 		folder.list();
@@ -244,6 +247,28 @@ public class FolderTest {
 				.toString();
 		
 		assertEquals(expected, output);
+	}
+	
+	@Test
+	public void should_tree_print_empty_when_no_file_inside_a_folder() {
+		Folder folder = new Folder("Parent");
+		
+		folder.tree();
+		
+		assertEquals("", outputStreamCaptor.toString().trim());
+		
+	}
+	
+	@Test
+	public void should_return_iterator_with_has_next_true_when_child_added() {
+		Folder folder = new Folder("Parent");	
+		File file = new File("Pie");
+		folder.add(file);
+		
+		Iterator<Node> iterator = folder.createIterator();
+		
+		assertTrue(iterator instanceof CompositeIterator);
+		assertTrue(iterator.hasNext());
 	}
 	
 	
