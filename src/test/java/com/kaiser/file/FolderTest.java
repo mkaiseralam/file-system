@@ -12,9 +12,14 @@ import java.util.Iterator;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 public class FolderTest {
+	
+	@Rule
+	public ExpectedException expectedException = ExpectedException.none();
 	
 	private final PrintStream standardOut = System.out;
 	private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
@@ -30,11 +35,36 @@ public class FolderTest {
 	}
 	
 	@Test
+	public void should_throw_exception_from_create_folder_whne_name_is_null() {
+		expectedException.expect(IllegalArgumentException.class);
+		expectedException.expectMessage(Folder.FOLDER_NAME_EXCEPTION_MESSAGE);
+		
+		new Folder(null);	
+	}
+	
+	@Test
+	public void should_throw_exception_from_create_folder_whne_name_is_empty() {
+		expectedException.expect(IllegalArgumentException.class);
+		expectedException.expectMessage(Folder.FOLDER_NAME_EXCEPTION_MESSAGE);
+		
+		new Folder("");	
+	}
+	
+	@Test
 	public void should_create_folder() {
 		Folder folder = new Folder("Apple");
 		
 		assertNotNull(folder);
 		assertTrue(folder instanceof Node);
+	}
+	
+	@Test
+	public void should_throw_exception_when_null_object_passed_to_add_folder() {
+		expectedException.expect(NullPointerException.class);
+		expectedException.expectMessage(Folder.ADD_EXCEPTION_MESSAGE);
+		
+		Folder folder = new Folder("Apple");	
+		folder.add(null);
 	}
 	
 	@Test
@@ -169,7 +199,6 @@ public class FolderTest {
 	@Test
 	public void should_walk_the_tree_of_a_folder_including_all_of_its_subfolders() {
 		Folder folder = new Folder("Car");
-		folder.add(new File("Wheel"));
 		
 		Folder subfolder1 = new Folder("Seat");
 		subfolder1.add(new File("Cat"));
@@ -184,10 +213,7 @@ public class FolderTest {
 		subfolder3.add(new File("Auto"));
 		subfolder1.add(subfolder3);
 		
-		Folder subFolder4 = new Folder("Glass");
-		subFolder4.add(new File("Window"));
-		subfolder2.add(subFolder4);
-		
+		folder.add(new File("Wheel"));
 		folder.add(subfolder1);
 		folder.add(subfolder2);
 	

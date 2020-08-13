@@ -5,15 +5,46 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 public class FileTest {
+	@Rule
+	public ExpectedException expectedException = ExpectedException.none();
+	
+	@Test
+	public void should_throw_exception_from_create_file_when_name_is_null() {
+		expectedException.expect(IllegalArgumentException.class);
+		expectedException.expectMessage(File.FILE_NAME_EXCEPTION_MESSAGE);
+		
+		new File(null);	
+	}
+	
+	@Test
+	public void should_throw_exception_from_create_file_when_name_is_empty() {
+		expectedException.expect(IllegalArgumentException.class);
+		expectedException.expectMessage(File.FILE_NAME_EXCEPTION_MESSAGE);
+		
+		new File("");	
+	}
+	
 	@Test
 	public void should_create_file() {
 		File file = new File("Pie");
 		
 		assertNotNull(file);
 		assertTrue(file instanceof Node);
+	}
+	
+	@Test
+	public void should_write_string_to_file_throw_exception_when_null_is_passed() {
+		expectedException.expect(NullPointerException.class);
+		expectedException.expectMessage(File.FILE_WRITE_EXCEPTION_MESSAGE);
+		
+		File file = new File("Pie");
+		
+		file.write(null);	
 	}
 	
 	@Test

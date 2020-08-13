@@ -2,6 +2,7 @@
 /build/
 !gradle/wrapper/gradle-wrapper.jar
 **/out
+.attach_pid*
 
 ### STS ###
 bin/

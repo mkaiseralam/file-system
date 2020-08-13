@@ -5,8 +5,14 @@ import java.util.Stack;
 
 import com.kaiser.file.Node;
 
+/**
+ *  It’s got the job of iterating over the Folder in the node,'
+ *  and of making sure all the child files (and child child folder, and so on) are included.
+ *  Implements {@link Iterator} which will get leverage
+ */
 public class CompositeIterator implements Iterator<Node> {
 	Stack<Iterator<Node>> stack = new Stack<Iterator<Node>>();
+	Node current;
 	
 	public CompositeIterator(Iterator<Node> iterator) {
 		stack.push(iterator);
@@ -37,6 +43,8 @@ public class CompositeIterator implements Iterator<Node> {
 		} else {
 			return null;
 		}
+		
 	}
+	
 
 }
