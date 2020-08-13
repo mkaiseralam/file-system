@@ -20,7 +20,7 @@ public class FileTest {
 	@Test
 	public void should_throw_exception_from_create_file_when_name_is_null() {
 		expectedException.expect(IllegalArgumentException.class);
-		expectedException.expectMessage(File.FILE_NAME_EXCEPTION_MESSAGE);
+		expectedException.expectMessage(File.EXCEPTION_MESSAGE_FILE_NAME);
 		
 		new File(null);	
 	}
@@ -28,7 +28,7 @@ public class FileTest {
 	@Test
 	public void should_throw_exception_from_create_file_when_name_is_empty() {
 		expectedException.expect(IllegalArgumentException.class);
-		expectedException.expectMessage(File.FILE_NAME_EXCEPTION_MESSAGE);
+		expectedException.expectMessage(File.EXCEPTION_MESSAGE_FILE_NAME);
 		
 		new File("");	
 	}
@@ -44,7 +44,7 @@ public class FileTest {
 	@Test
 	public void should_write_string_to_file_throw_exception_when_null_is_passed() {
 		expectedException.expect(NullPointerException.class);
-		expectedException.expectMessage(File.FILE_WRITE_EXCEPTION_MESSAGE);
+		expectedException.expectMessage(File.EXCEPTION_MESSAGE_FILE_WRITE);
 		
 		File file = new File("Pie");
 		

@@ -10,7 +10,7 @@ import lombok.Getter;
 public abstract class Node {
 	protected String name;
 	
-	public abstract int size();
+	protected abstract int size();
 	
 	public abstract Iterator<Node> createIterator();
 }

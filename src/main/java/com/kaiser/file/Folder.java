@@ -11,8 +11,8 @@ import com.kaiser.iterator.CompositeIterator;
 public class Folder extends Node {
 	private List<Node> nodes;
 	
-	public static final String FOLDER_NAME_EXCEPTION_MESSAGE = "Folder name can not be null or empty";
-	public static final String ADD_EXCEPTION_MESSAGE = "File/folder can not be null";
+	public static final String EXCEPTION_MESSAGE_FOLDER_NAME = "Folder name can not be null or empty";
+	public static final String EXCEPTION_MESSAGE_ADD_OPERATION = "File/folder can not be null";
 	
 	/**
 	 * <p>This will create a folder node  with name.</p>
@@ -21,7 +21,7 @@ public class Folder extends Node {
 	 * @throws IllegalArgumentException if name is null or empty
 	 */
 	public Folder(String name) {
-		super(validateFolderName(name));
+		super(validate(name));
 		this.nodes = new ArrayList<>();
 	}
 	
@@ -50,7 +50,7 @@ public class Folder extends Node {
 	 * @throws NullPointerException if @param node is null
 	 */
 	public void add(Node node) {
-		Objects.requireNonNull(node, ADD_EXCEPTION_MESSAGE);
+		Objects.requireNonNull(node, EXCEPTION_MESSAGE_ADD_OPERATION);
 		
 		nodes.add(node);
 	}
@@ -84,9 +84,9 @@ public class Folder extends Node {
 		}
 	}
 	
-	private static String validateFolderName(String name) {
+	private static String validate(String name) {
 		if (name == null || name.isBlank()) {
-			throw new IllegalArgumentException(FOLDER_NAME_EXCEPTION_MESSAGE);
+			throw new IllegalArgumentException(EXCEPTION_MESSAGE_FOLDER_NAME);
 		}
 		return name;
 	}

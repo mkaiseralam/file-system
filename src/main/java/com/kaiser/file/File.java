@@ -8,8 +8,8 @@ import com.kaiser.iterator.NullIterator;
 public class File extends Node {
 	private String content;
 	
-	public static final String FILE_NAME_EXCEPTION_MESSAGE = "File name can not be null or empty";
-	public static final String FILE_WRITE_EXCEPTION_MESSAGE = "Content can not be null";
+	public static final String EXCEPTION_MESSAGE_FILE_NAME = "File name can not be null or empty";
+	public static final String EXCEPTION_MESSAGE_FILE_WRITE = "Content can not be null";
 
 	/**
 	 * <p>This will create a file node  with name.</p>
@@ -18,7 +18,7 @@ public class File extends Node {
 	 * @throws IllegalArgumentException if name is null or empty
 	 */
 	public File (String name) {
-		super(validateFileName(name));
+		super(validate(name));
 		this.content = "";
 	}
 	
@@ -50,7 +50,7 @@ public class File extends Node {
 	 * @throws NullPointerException if content is null
 	 */	
 	public void write(String content) {
-		Objects.requireNonNull(content, FILE_WRITE_EXCEPTION_MESSAGE);
+		Objects.requireNonNull(content, EXCEPTION_MESSAGE_FILE_WRITE);
 		
 		this.content = new StringBuilder()
 					.append(this.content)
@@ -73,9 +73,9 @@ public class File extends Node {
 		content = "";
 	}
 	
-	private static String validateFileName(String name) {
+	private static String validate(String name) {
 		if (name == null || name.isBlank()) {
-			throw new IllegalArgumentException(FILE_NAME_EXCEPTION_MESSAGE);
+			throw new IllegalArgumentException(EXCEPTION_MESSAGE_FILE_NAME);
 		}
 		return name;
 	}

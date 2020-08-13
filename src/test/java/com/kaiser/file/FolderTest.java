@@ -17,7 +17,6 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import com.kaiser.iterator.CompositeIterator;
-import com.kaiser.iterator.NullIterator;
 
 public class FolderTest {
 	
@@ -40,7 +39,7 @@ public class FolderTest {
 	@Test
 	public void should_throw_exception_from_create_folder_whne_name_is_null() {
 		expectedException.expect(IllegalArgumentException.class);
-		expectedException.expectMessage(Folder.FOLDER_NAME_EXCEPTION_MESSAGE);
+		expectedException.expectMessage(Folder.EXCEPTION_MESSAGE_FOLDER_NAME);
 		
 		new Folder(null);	
 	}
@@ -48,7 +47,7 @@ public class FolderTest {
 	@Test
 	public void should_throw_exception_from_create_folder_whne_name_is_empty() {
 		expectedException.expect(IllegalArgumentException.class);
-		expectedException.expectMessage(Folder.FOLDER_NAME_EXCEPTION_MESSAGE);
+		expectedException.expectMessage(Folder.EXCEPTION_MESSAGE_FOLDER_NAME);
 		
 		new Folder("");	
 	}
@@ -64,7 +63,7 @@ public class FolderTest {
 	@Test
 	public void should_throw_exception_when_null_object_passed_to_add_folder() {
 		expectedException.expect(NullPointerException.class);
-		expectedException.expectMessage(Folder.ADD_EXCEPTION_MESSAGE);
+		expectedException.expectMessage(Folder.EXCEPTION_MESSAGE_ADD_OPERATION);
 		
 		Folder folder = new Folder("Apple");	
 		folder.add(null);
